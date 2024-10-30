@@ -1,25 +1,23 @@
-# Dockerfile
-# Start with the official Go image
-FROM golang:1.21 as builder
+# syntax=docker/dockerfile:1
 
-# Set up working directory
+FROM golang:1.23
+
+# Set destination for COPY
 WORKDIR /app
 
-# Copy go.mod and go.sum files and download dependencies
+# Copy go.mod and go.sum files first to leverage Docker cache
 COPY go.mod go.sum ./
 RUN go mod download
 
-# Copy the rest of the app
+# Copy the entire source code into the container
 COPY . .
 
-# Build the Go binary
-RUN go build -o main .
+# Build the Go application
+RUN CGO_ENABLED=0 GOOS=linux go build -o /docker-gs-ping ./cmd/main.go # Adjust this path to your main Go file
 
-# Use a minimal image to run the binary
-FROM gcr.io/distroless/base-debian10
+# Expose the port your application runs on
+EXPOSE 8080
 
-COPY --from=builder /app/main /main
-
-# Run the binary
-ENTRYPOINT ["/main"]
+# Run the compiled binary
+CMD ["/docker-gs-ping"]
 

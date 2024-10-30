@@ -1,8 +1,8 @@
 # atlas.hcl
 env "docker" {
-  url = "postgresql://myuser:mypassword@postgres:5432/mydb?sslmode=disable"
+  url = "postgresql://myuser:mypassword@localhost:1234/mydb?sslmode=disable"
   migration {
-    dir = "file://schema/migrations"
+    dir = "file://migrations"
     format = atlas
   }
 }
