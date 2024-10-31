@@ -1,0 +1,37 @@
+### Create a new file
+POST http://localhost:8080/api/files/
+Content-Type: application/json
+
+{
+  "code_repository": "git@gitlab.com:breeze-airways/operations/operations-front-end.git",
+  "code_file_path": "libs/shared-configs/src/lib/tailwind.config.js",
+  "docs_repository": "git@gitlab.com:breeze-airways/operations/operations-front-end.git",
+  "docs_file_path": "https://gitlab.com/breeze-airways/operations/operations-front-end/-/blob/aa27e21ef6c41da5aed211010e9fbc3afcbe3297/README.md"
+}
+
+### Get all files
+GET http://localhost:8080/api/files/
+
+### Get all files by code_repo
+GET http://localhost:8080/api/files/?code_repo=github.com/user/code-repo-2
+
+### Get all files by code_path
+GET http://localhost:8080/api/files/?code_repo=git@gitlab.com:breeze-airways/operations/operations-front-end.git&code_file_path=libs/shared-configs/src/lib/tailwind.config.js
+
+### Get a file by ID
+GET http://localhost:8080/api/files/1
+
+### Update a file
+PUT http://localhost:8080/api/files/1
+Content-Type: application/json
+
+{
+  "code_repository": "github.com/user/updated-code-repo",
+  "code_file_path": "/src/updated_main.go",
+  "docs_repository": "github.com/user/updated-docs-repo",
+  "docs_file_path": "/docs/updated_readme.md"
+}
+
+### Delete a file
+DELETE http://localhost:8080/api/files/2
+

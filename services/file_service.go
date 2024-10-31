@@ -13,7 +13,7 @@ func NewFileService(repo *repository.FileRepository) *FileService {
     return &FileService{Repo: repo}
 }
 
-func (s *FileService) Create(file *models.File) error {
+func (s *FileService) Create(file *models.File) (*int, error) {
     return s.Repo.Create(file)
 }
 
@@ -33,3 +33,14 @@ func (s *FileService) Delete(id int) error {
     return s.Repo.Delete(id)
 }
 
+func (s *FileService) GetByCodeRepo(repo string) ([]models.File, error){
+    return s.Repo.GetByCodeRepo(repo)
+}
+
+func (s *FileService) GetByCodeFilePath(repo string, filePath string) ([]models.File, error){
+    return s.Repo.GetByCodeFilePath(repo, filePath)
+}
+
+func (s *FileService) GetByDocsRepo(repo string) ([]models.File, error){
+    return s.Repo.GetByDocsRepo(repo)
+}

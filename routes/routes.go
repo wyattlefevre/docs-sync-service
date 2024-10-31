@@ -17,5 +17,8 @@ func SetupRoutes(router *gin.Engine, db *sql.DB) {
 	{
 		api.POST("/", fileHandler.Create)
 		api.GET("/", fileHandler.GetAll)
+		api.GET("/:id", fileHandler.GetByID)
+		api.PUT("/:id", fileHandler.Update)
+		api.DELETE("/:id", fileHandler.Delete)
 	}
 }
